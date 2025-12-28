@@ -126,7 +126,9 @@
         <p class="instruction">📸 Share your favorite moments from the party! Tap below to start.</p>
         
         <button id="upload-btn">📤 UPLOAD PHOTO</button>
-        <button id="view-gallery-btn">🖼️ VIEW GALLERY</button>
+        <a href="gallery.html" target="_blank" style="text-decoration: none;">
+    <button id="view-gallery-btn" type="button">🖼️ VIEW GALLERY</button>
+</a>
         
         <div id="status-msg" style="margin-top:10px; font-weight:bold; color:green;"></div>
     </div>
@@ -158,25 +160,6 @@
             myWidget.open();
         }, false);
 
-        // 2. Setup Gallery Widget
-        document.getElementById("view-gallery-btn").addEventListener("click", function(){
-            const galleryDiv = document.getElementById('my-gallery');
-            galleryDiv.style.display = "block"; // Show the gallery
-            
-            const myGallery = cloudinary.galleryWidget({
-                container: "#my-gallery",
-                cloudName: cloudName,
-                mediaAssets: [{ tag: tag, mediaType: "image" }], 
-                zoom: false,
-                aspectRatio: "1:1",
-                navigation: "always"
-            });
-            
-            myGallery.render();
-            
-            // Scroll down to gallery
-            galleryDiv.scrollIntoView({ behavior: 'smooth' });
-        });
     </script>
 </body>
 </html>
