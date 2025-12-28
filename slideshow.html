@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIVE Pista Slideshow - 60th Birthday</title>
+    
+    <script src="https://product-gallery.cloudinary.com/all.js" type="text/javascript"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            margin: 0;
+            background-color: #000; /* Black background looks best on TV */
+            color: white;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .header {
+            background-color: #e63946; /* Fiesta Red */
+            padding: 15px;
+            text-align: center;
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            z-index: 10;
+            color: #ffb703; /* Fiesta Yellow text */
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        #slideshow-container {
+            flex-grow: 1;
+            width: 100vw;
+            height: 100%;
+        }
+
+        /* Hide technical UI elements for a clean TV look */
+        .pg-thumbnail-container, .pg-navigation-container {
+            display: none !important;
+        }
+        
+        .footer-tag {
+            position: fixed;
+            bottom: 10px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #ffb703;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">🎉 HAPPY 60th BIRTHDAY! 🎉</div>
+
+    <div id="slideshow-container"></div>
+
+    <div class="footer-tag">📸 Scan the QR on your souvenir to add photos!</div>
+
+    <script>
+        const cloudName = 'dfeoryydh'; // REPLACE THIS
+        const tag = 'first-time';
+
+        function startSlideshow() {
+            const myGallery = cloudinary.galleryWidget({
+                container: "#slideshow-container",
+                cloudName: cloudName,
+                mediaAssets: [{ tag: tag, mediaType: "image" }],
+                displayProps: {
+                    mode: "classic",
+                    transition: "fade", // Smooth transition
+                    breakpoint: 0
+                },
+                zoom: false,
+                aspectRatio: "16:9", // Widescreen TV ratio
+                navigation: "none",
+                autoplay: true,
+                autoplaySpeed: 5000, // Changes every 5 seconds
+                themeProps: { primary: "#e63946" }
+            });
+            myGallery.render();
+        }
+
+        // Initialize the slideshow
+        startSlideshow();
+
+        // SMART RELOAD: 
+        // Every 10 minutes, the page will fully reload itself.
+        // This ensures that new photos uploaded by guests are pulled into the loop 
+        // and prevents the browser from getting slow/stuck.
+        setTimeout(() => {
+            window.location.reload();
+        }, 600000); // 600,000ms = 10 minutes
+    </script>
+</body>
+</html>
