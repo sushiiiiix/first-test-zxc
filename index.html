@@ -84,6 +84,24 @@
             font-size: 0.8rem;
             color: #555;
         }
+
+        #view-gallery-btn {
+    background-color: var(--fiesta-blue);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 15px;
+    width: 100%; /* Makes it match the upload button width */
+    transition: transform 0.2s;
+}
+
+#view-gallery-btn:active {
+    transform: scale(0.95);
+}
     </style>
 </head>
 <body>
@@ -99,6 +117,8 @@
         <button id="upload-btn">📤 UPLOAD PHOTO</button>
         
         <div id="status-msg" style="margin-top:20px; font-weight:bold; color:green;"></div>
+
+        <button id="view-gallery-btn">🖼️ VIEW GALLERY</button>
     </div>
 
     <p class="footer">Maligayang Bati! | Created with ❤️</p>
@@ -113,6 +133,7 @@
         const myWidget = cloudinary.createUploadWidget({
             cloudName: 'dfeoryydh', 
             uploadPreset: 'first-test',
+            tags: ['pista_60th'],
             sources: ['local', 'camera'], // Guests can pick from gallery or take a live photo
             multiple: false,
             clientAllowedFormats: ["png", "jpg", "jpeg"],
@@ -124,9 +145,14 @@
             }
         });
 
-        document.getElementById("upload-btn").addEventListener("click", function(){
-            myWidget.open();
-        }, false);
+        document.getElementById("view-gallery-btn").onclick = function () {
+    const galleryWidget = cloudinary.galleryWidget({
+        container: "#gallery-container", // You'll need an empty div with this ID
+        cloudName: 'dfeoryydh',
+        mediaAssets: [{ tag: 'First-test' }], // It will show all photos tagged with this
+    });
+    galleryWidget.render();
     </script>
-</body>
+</body> 
 </html>
+
