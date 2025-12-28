@@ -117,11 +117,25 @@
             font-size: 0.8rem;
             color: #555;
         }
+
+        @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+img {
+    animation: float 3s ease-in-out infinite;
+}
     </style>
 </head>
 <body>
 
     <div class="flags"></div>
+
+    <div style="margin-top: 15px;">
+        <img src="Kwadro.png" alt="Pista Logo" style="width: 150px; height: auto; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+    </div>
 
     <h1>VIVA!</h1>
     <h2>60th Birthday Celebration</h2>
