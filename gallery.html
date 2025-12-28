@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>60th Birthday - Photo Gallery</title>
+    <script src="https://product-gallery.cloudinary.com/all.js" type="text/javascript"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffb703; /* Fiesta Yellow */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-family: 'Luckiest Guy', cursive;
+            color: #e63946;
+            text-shadow: 2px 2px white;
+        }
+        #gallery-container {
+            width: 100%;
+            max-width: 1000px;
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .back-btn {
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: white;
+            background: #023047;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← Back to Upload</a>
+    <h1>Pista Gallery</h1>
+    <div id="gallery-container"></div>
+
+    <script>
+        const myGallery = cloudinary.galleryWidget({
+            container: "#gallery-container",
+            cloudName: 'YOUR_CLOUD_NAME', // REPLACE THIS
+            mediaAssets: [{ tag: 'pista_60th', mediaType: "image" }],
+            zoom: true,
+            aspectRatio: "1:1",
+            navigation: "always"
+        });
+        myGallery.render();
+    </script>
+</body>
+</html>
