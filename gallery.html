@@ -101,56 +101,35 @@
         Maligayang ika-60 na Kaarawan! 🎂
     </p>
 
-    <script>
+<script>
     const cloudName = 'dfeoryydh'; // REPLACE THIS
     const tag = 'first-test';
-    let myGallery = null; // Store the gallery instance here
 
-    function loadGallery() {
-        const container = document.getElementById('gallery-wrapper');
-        
-        // 1. Clear the container HTML
-        container.innerHTML = '';
+    // 1. Simply render the gallery once on page load
+    const myGallery = cloudinary.galleryWidget({
+        container: "#gallery-wrapper",
+        cloudName: cloudName,
+        mediaAssets: [{ tag: tag, mediaType: "image" }],
+        zoom: true,
+        aspectRatio: "1:1",
+        navigation: "always",
+        themeProps: { 
+            primary: "#e63946",
+            active: "#023047"
+        }
+    });
 
-        // 2. Initialize the widget
-        myGallery = cloudinary.galleryWidget({
-            container: "#gallery-wrapper",
-            cloudName: cloudName,
-            mediaAssets: [{ tag: tag, mediaType: "image" }],
-            zoom: true,
-            aspectRatio: "1:1",
-            navigation: "always",
-            themeProps: { 
-                primary: "#e63946",
-                active: "#023047"
-            }
-        });
+    myGallery.render();
 
-        // 3. Render it
-        myGallery.render();
-    }
-
-    // Initial load
-    loadGallery();
-
-    // Refresh Button Logic
+    // 2. Refresh Button: This tells the browser to reload the whole tab.
+    // This is the most reliable way to show new photos without glitches.
     document.getElementById('refresh-btn').addEventListener('click', function() {
         const btn = this;
-        const originalText = btn.innerHTML;
-        
-        btn.innerHTML = "⌛ Updating...";
+        btn.innerHTML = "⌛ Loading...";
         btn.disabled = true;
-
-        // Force a slight delay to ensure the DOM is ready for a new render
-        setTimeout(() => {
-            loadGallery();
-            
-            // Re-enable button
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }, 1000);
-        }, 100);
+        
+        // Reloads the current page
+        window.location.reload();
     });
 </script>
 </body>
