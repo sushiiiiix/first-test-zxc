@@ -102,49 +102,56 @@
     </p>
 
     <script>
-        const cloudName = 'dfeoryydh'; // REPLACE THIS
-        const tag = 'first-test';             // Must match the tag in index.html
+    const cloudName = 'dfeoryydh'; // REPLACE THIS
+    const tag = 'first-test';
+    let myGallery = null; // Store the gallery instance here
 
-        function loadGallery() {
-            // Clear the wrapper to force a fresh reload of images
-            document.getElementById('gallery-wrapper').innerHTML = '';
+    function loadGallery() {
+        const container = document.getElementById('gallery-wrapper');
+        
+        // 1. Clear the container HTML
+        container.innerHTML = '';
 
-            const myGallery = cloudinary.galleryWidget({
-                container: "#gallery-wrapper",
-                cloudName: cloudName,
-                mediaAssets: [{ tag: tag, mediaType: "image" }],
-                zoom: true,              // Allows guests to click and zoom into photos
-                aspectRatio: "1:1",       // Keeps the grid looking neat like Instagram
-                navigation: "always",
-                themeProps: { 
-                    primary: "#e63946",   // Red buttons inside the gallery
-                    active: "#023047"     // Blue for active elements
-                }
-            });
-            myGallery.render();
-        }
+        // 2. Initialize the widget
+        myGallery = cloudinary.galleryWidget({
+            container: "#gallery-wrapper",
+            cloudName: cloudName,
+            mediaAssets: [{ tag: tag, mediaType: "image" }],
+            zoom: true,
+            aspectRatio: "1:1",
+            navigation: "always",
+            themeProps: { 
+                primary: "#e63946",
+                active: "#023047"
+            }
+        });
 
-        // Initial load when page opens
-        loadGallery();
+        // 3. Render it
+        myGallery.render();
+    }
 
-        // Refresh Button Logic
-        document.getElementById('refresh-btn').addEventListener('click', function() {
-            const btn = this;
-            const originalText = btn.innerHTML;
-            
-            btn.innerHTML = "⌛ Wait...";
-            btn.style.opacity = "0.7";
-            btn.disabled = true;
+    // Initial load
+    loadGallery();
 
+    // Refresh Button Logic
+    document.getElementById('refresh-btn').addEventListener('click', function() {
+        const btn = this;
+        const originalText = btn.innerHTML;
+        
+        btn.innerHTML = "⌛ Updating...";
+        btn.disabled = true;
+
+        // Force a slight delay to ensure the DOM is ready for a new render
+        setTimeout(() => {
             loadGallery();
-
-            // Give it 1.5 seconds before enabling the button again
+            
+            // Re-enable button
             setTimeout(() => {
                 btn.innerHTML = originalText;
-                btn.style.opacity = "1";
                 btn.disabled = false;
-            }, 1500);
-        });
-    </script>
+            }, 1000);
+        }, 100);
+    });
+</script>
 </body>
 </html>
